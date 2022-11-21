@@ -1,0 +1,58 @@
+body {
+    position: relative;
+    height: 1000px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+p {
+    position: absolute;
+    opacity: 0;
+}
+@media (max-width: 3400px) and (min-width: 1400px) {
+    body {
+        background-color: rgb(161, 33, 33);
+    }
+    .xxl {
+        opacity: 1;
+    }
+}
+@media (max-width: 1399px) and (min-width:1200px) {
+    body {
+        background-color: rgb(78, 168, 129);
+    }
+    .xl {
+        opacity: 1;
+    }
+}
+@media (max-width: 1199px) and (min-width: 768px) {
+    body {
+        background-color: rgb(60, 26, 156);
+    }
+    .lg {
+        opacity: 1;
+    }
+
+}
+@media (max-width: 767px) and (min-width: 576px) {
+    body {
+        background-color: rgb(60, 26, 156);
+    }
+    .sm {
+        opacity: 1;
+    }
+
+}
+@media (max-width: 575px){
+    body {
+        background-color: rgb(110, 0, 0);
+    }
+    .xs {
+        opacity: 1;
+    }
+
+}
+
+
+
+

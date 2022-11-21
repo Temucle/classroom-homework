@@ -1,0 +1,35 @@
+button {
+    border: black solid 1px;
+    width: 251px;
+    height: 101px;
+    background-color: gray;
+    margin: 0;
+    padding: 0;
+    border-radius: 50px;
+    position: relative;
+
+}
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: aliceblue;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.301);
+    padding: 0;    
+    left: 0;
+}
+button:hover {
+    background-color: rgb(67, 185, 24);
+    transition-duration: 0.3s;
+    transition-property: all;
+    transition-timing-function: linear;
+}
+
+button:hover .circle {
+    position: absolute;
+    top: 0;
+    left: 149px;
+    transition-duration: 0.3s;
+    transition-property: all;
+    transition-timing-function: linear;
+}
