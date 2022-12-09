@@ -2,11 +2,11 @@ let input = +prompt('Таны оруулсан тоог анхны')
 let result = ""
 for( i=2; i < input; i++ ) {
     if ( input == 2 ) {
-        alert('Энэ нь анхны тоо байна.')
+        result = 'Энэ нь анхны тоо байна.'
         break
     }
     if ( input == 0 || input == 1) {
-        alert('Энэ нь анхны тоо биш байна.')
+        result = 'Энэ нь анхны тоо биш байна.'
         break
     }
     else if ( input%i == 0 ) {
