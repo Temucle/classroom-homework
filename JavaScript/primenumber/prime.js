@@ -9,7 +9,7 @@ for( i=2; i < input; i++ ) {
         result = 'Энэ нь анхны тоо байна.'
     }
 }
-if( input == 0 || input == 1) {
+if( input <= 1) {
     result = 'Энэ нь анхны тоо биш байна.'
 }
 else if ( input == 2 ) {
