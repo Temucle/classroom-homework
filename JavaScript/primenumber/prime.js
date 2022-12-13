@@ -1,4 +1,4 @@
-let input = +prompt('Таны оруулсан тоог анхны')
+let input = +prompt('Дурын тоог оруулна уу.')
 let result = ""
 for( i=2; i < input; i++ ) {
     if ( input%i == 0 ) {
