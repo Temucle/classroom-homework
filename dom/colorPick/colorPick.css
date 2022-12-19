@@ -1,0 +1,32 @@
+body {
+    background-color:azure;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 1300px;
+}
+.box {
+    margin-top: 100px;
+    width: 1300px;
+    border: solid rgba(0, 0, 0, .7) 2px;
+    border-radius: 10px;
+}
+.content {
+    display: flex;
+    margin: 100px;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+.product-img {
+    height: 500px;
+}
+.text {
+    text-align: center;
+}
+ul {
+    margin-top: 30px;
+    text-align: start;
+    width: 500px;
+    line-height: 30px;
+}
