@@ -16,9 +16,8 @@ body {
     display: flex;
     margin: 100px;
     gap: 80px;
-    flex-wrap: wrap;
 }
-.product-img {
+#product-img {
     height: 500px;
 }
 .text {
@@ -29,4 +28,21 @@ ul {
     text-align: start;
     width: 500px;
     line-height: 30px;
+}
+button {
+    padding: 10px;
+    margin-right: 10px;
+    
+}
+#lightgrey {
+    background-color: lightgrey;
+}
+#medium-brown {
+    background-color: brown;
+}
+#purple {
+    background-color: purple;
+}
+#lemonade {
+    background-color: lemonchiffon;
 }
