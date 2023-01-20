@@ -1,13 +1,39 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Montserrat, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+#emailInput:focus {
+  border: white solid 4px;
+}
+#emailInput:hover {
+  border: solid white 4px;
+  transition-duration: 0.3s;
+}
+#emailInput {
+  width: 250px;
+  height: 34px;
+  background-color: black;
+  border: white solid 2px;
+  color: white;
+  outline: 0;
+}
+#footerSubscribe {
+  border: white solid 2px;
+  width: 250px;
+  height: 34px;
+  background-color: black;
+  color: white;
+}
+
+#footerSubscribe:hover {
+  transition-duration: 0.5s;
+  background-color: aliceblue;
+  color: red;
 }
