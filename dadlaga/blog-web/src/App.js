@@ -22,7 +22,10 @@ function App() {
   return (
     <BrowserRouter className="App">
       <Routes>
-        <Route path="*" element={<ClientApp articles={articles} />} />
+        <Route
+          path="*"
+          element={<ClientApp articles={articles} setArticles={setArticles} />}
+        />
         <Route
           path="/admin"
           element={<AdminApp setArticles={setArticles} articles={articles} />}

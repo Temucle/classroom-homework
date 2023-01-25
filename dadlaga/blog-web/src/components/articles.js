@@ -1,23 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import uuid from "react-uuid";
+import axios from "axios";
 
-function Articles({ articles }) {
-  const current = new Date();
-  const articleDate = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
+function Articles({ articles, setArticles }) {
   const dayjs = require("dayjs");
-  dayjs().format();
+  useEffect(() => {
+    axios.get("https://dummyjson.com/posts").then((res) => {
+      const { data, status } = res;
+      data.posts.map((article) => {
+        article.img =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png";
+        article.key = uuid();
+        article.postedTime = dayjs("2004-4-26").format("MMM DD, YYYY");
+      });
+      setArticles([...articles, ...data.posts]);
+    });
+  }, []);
 
-  var postedTime = dayjs();
-  var relativeTime = require("dayjs/plugin/relativeTime");
-  dayjs.extend(relativeTime);
-  var a = dayjs();
-  const [articleTimer, setArticleTimer] = useState(
-    dayjs().from(postedTime, true)
-  );
-  // setInterval(setArticleTimer(dayjs().from(postedTime, true)), 40000);
   let articleCard = articles.map((article, index) => {
     return (
       <article
@@ -28,7 +28,7 @@ function Articles({ articles }) {
           border: "1px solid gray",
           marginBottom: "20px",
         }}
-        key={uuid}
+        key={article.key}
       >
         <div className="articleIMGdiv d-flex">
           <a style={{ cursor: "pointer" }}>
@@ -62,8 +62,10 @@ function Articles({ articles }) {
                 <div style={{ fontSize: "12px" }}>
                   <p className="posterName m-0">Admin</p>
                   <div className="d-flex">
-                    <p className="articleDate me-2 mb-0">{articleDate}</p>|
-                    <p className="articleTimer ms-2 mb-0">{articleTimer}</p>
+                    <p className="articleDate me-2 mb-0">
+                      {article.postedTime}
+                    </p>
+                    |<p className="articleTimer ms-2 mb-0">1 min</p>
                   </div>
                 </div>
               </div>
@@ -80,8 +82,12 @@ function Articles({ articles }) {
                   cursor: "pointer",
                 }}
               >
-                <h2 style={{ fontWeight: "200" }}>{article.title}</h2>
-                <p style={{ fontWeight: "100" }}>{article.body}</p>
+                <h2 style={{ fontWeight: "300" }}>
+                  {article.title.split("").slice(0, 45).join("")}
+                </h2>
+                <p style={{ fontWeight: "200" }}>
+                  {article.body.split("").slice(0, 190).join("") + " . . ."}
+                </p>
               </a>
               <div
                 className="articleFooter pt-2 d-flex"
@@ -98,12 +104,21 @@ function Articles({ articles }) {
                   <p className="articleCommentNumber me-2">0 comments</p>
                 </div>
                 <div className="articleFooterRight d-flex">
-                  <p className="articleLikeNumber me-2">12</p>
+                  <p className="articleLikeNumber me-2">{article.reactions}</p>
                   <button
                     className="articleLikeBtn btn  p-0"
                     style={{ border: "none", marginBottom: "16px" }}
                   >
-                    🤎
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="aqua"
+                      class="bi bi-heart"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                    </svg>
                   </button>
                 </div>
               </div>

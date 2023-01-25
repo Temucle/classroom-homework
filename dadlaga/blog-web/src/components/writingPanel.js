@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import Modal from "react-bootstrap/Modal";
@@ -24,6 +24,7 @@ function WritingPanel({ articles, setArticles }) {
 
   const [articleTitle, setArticleTitle] = useState("");
   const [articleBody, setArticleBody] = useState("");
+  const [articleCategory, setArticleCategory] = useState();
 
   const handleClose = () => {
     setShow(false);
@@ -33,6 +34,7 @@ function WritingPanel({ articles, setArticles }) {
   const handleShow = () => setShow(true);
 
   let newCategories;
+  let apiArticles;
 
   let [categories, setCategory] = useState([
     "Эдийн засаг",
@@ -47,6 +49,8 @@ function WritingPanel({ articles, setArticles }) {
       {item}
     </option>
   ));
+  const dayjs = require("dayjs");
+  dayjs().format();
 
   function urlTranslator(event) {
     urlChanger(event.target.value);
@@ -66,10 +70,10 @@ function WritingPanel({ articles, setArticles }) {
     } else {
     }
   }
+
   if (toHome === true) {
     return <Navigate to="/home" />;
   }
-
   return (
     <div className="container mt-5" style={{ textAlign: "center" }}>
       <Form.Group className="mb-3">
@@ -112,7 +116,12 @@ function WritingPanel({ articles, setArticles }) {
       </Form.Group>
       <div className="mb-5">
         <label htmlFor="news_category">Мэдээний төрөл сонгох: </label>
-        <select className="mx-3" id="news_category" name="news_category">
+        <select
+          className="mx-3"
+          id="news_category"
+          name="news_category"
+          onChange={(e) => setArticleCategory(e.target.value)}
+        >
           {categoriesList}
         </select>
 
@@ -159,12 +168,16 @@ function WritingPanel({ articles, setArticles }) {
             title: articleTitle,
             body: articleBody,
             img: articleIMG,
+            postedTime: dayjs().format("MMM DD, YYYY"),
+            key: uuid(),
+            reactions: 0,
+            category: articleCategory,
           };
           setArticles([newArticle, ...articles]);
           setArticleBody("");
           setArticleTitle("");
           IMGChanger("");
-          setToHome(true);
+          // setToHome(true);
         }}
       >
         Post
