@@ -26,12 +26,14 @@ function MainNav() {
           <a
             className="ms-5 text-decoration-none text-white"
             style={{ cursor: "pointer" }}
+            href="http://localhost:3000/home"
           >
             HOME
           </a>
           <a
             className="ms-5 text-decoration-none text-white"
             style={{ cursor: "pointer" }}
+            href="http://localhost:3000/blogs"
           >
             BLOG
           </a>

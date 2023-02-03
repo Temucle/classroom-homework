@@ -15,21 +15,17 @@ import ClientApp from "./client/ClientApp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminApp from "./admin/AdminApp";
 import { useState } from "react";
+import PageBlogs from "./client/PageBlogs";
 
 function App() {
   const [articles, setArticles] = useState([]);
 
   return (
-    <BrowserRouter className="App">
+    <BrowserRouter Name="App">
       <Routes>
-        <Route
-          path="*"
-          element={<ClientApp articles={articles} setArticles={setArticles} />}
-        />
-        <Route
-          path="/admin"
-          element={<AdminApp setArticles={setArticles} articles={articles} />}
-        />
+        <Route path="*" element={<ClientApp />} />
+        <Route path="/blogs" element={<PageBlogs />} />
+        <Route path="/admin" element={<AdminApp />} />
       </Routes>
     </BrowserRouter>
   );

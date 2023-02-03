@@ -6,10 +6,11 @@ import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import Modal from "react-bootstrap/Modal";
 import React from "react";
-import uuid from "react-uuid";
+import { v4 as uuid } from "uuid";
 import { Link, useNavigate, Navigate } from "react-router-dom";
+import axios from "axios";
 
-function WritingPanel({ articles, setArticles }) {
+function WritingPanel() {
   const [articleIMG, setIMG] = useState(
     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png"
   );
@@ -25,6 +26,9 @@ function WritingPanel({ articles, setArticles }) {
   const [articleTitle, setArticleTitle] = useState("");
   const [articleBody, setArticleBody] = useState("");
   const [articleCategory, setArticleCategory] = useState();
+  const [articleCategories, setArticleCategories] = useState();
+
+  const [isCategoryRead, setIsCategoryLoad] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -36,40 +40,121 @@ function WritingPanel({ articles, setArticles }) {
   let newCategories;
   let apiArticles;
 
-  let [categories, setCategory] = useState([
-    "Эдийн засаг",
-    "Улс төр",
-    "Шинжлэх ухаан",
-    "Гэмт хэрэг",
-    "Эрүүл мэнд",
-  ]);
+  function loadCategories() {
+    axios.get(`http://localhost:1234/categories`).then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setArticleCategories(data);
+        setIsCategoryLoad(true);
+      } else {
+        alert(`Алдаа гарлаа: ${status}`);
+      }
+    });
+  }
 
-  let categoriesList = categories.map((item, index) => (
-    <option key={index} value={item}>
-      {item}
-    </option>
-  ));
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  if (isCategoryRead) {
+    var categoriesList = articleCategories.map((item, index) => (
+      <option key={item.id} value={item.id}>
+        {item.name}
+      </option>
+    ));
+  }
+
   const dayjs = require("dayjs");
   dayjs().format();
 
   function urlTranslator(event) {
     urlChanger(event.target.value);
   }
+
   function IMGChanger() {
     setIMG(IMGaddress);
     urlChanger("");
   }
+
   function categoryInputValueChanger(event) {
     getNewCategory(event.target.value);
   }
+
   function addCategory() {
     if (categoryInputValue) {
-      newCategories = [...categories, categoryInputValue];
-      handleClose();
-      setCategory(newCategories);
+      axios
+        .post(`http://localhost:1234/categories`, {
+          name: categoryInputValue,
+        })
+        .then((res) => {
+          const { status } = res;
+          if (status === 201) {
+            handleClose();
+            loadCategories();
+          }
+        });
     } else {
     }
   }
+
+  function addArticle() {
+    if (articleBody && articleTitle && articleIMG) {
+      axios
+        .post(`http://localhost:1234/articles`, {
+          newArticle: {
+            title: articleTitle,
+            body: articleBody,
+            img: articleIMG,
+            postedTime: dayjs().format("MMM DD, YYYY"),
+            key: uuid(),
+            reactions: 0,
+            category: articleCategory,
+            isLiked: false,
+            comments: [
+              {
+                writer: {
+                  profilePic: "sadfasdfasdf",
+                  username: "User1",
+                },
+                commentPostedDate: "2020-1-1",
+                commentContent: "Great article!",
+              },
+              {
+                writer: {
+                  profilePic: "sadfasdfasdf",
+                  username: "User1",
+                },
+                commentPostedDate: "2020-1-1",
+                commentContent: "Great article!",
+              },
+              {
+                writer: {
+                  profilePic: "sadfasdfasdf",
+                  username: "User1",
+                },
+                commentPostedDate: "2020-1-1",
+                commentContent: "Great article!",
+              },
+            ],
+          },
+        })
+        .then((res) => {
+          const { status } = res;
+          if (status === 201) {
+            setArticleBody("");
+            setArticleTitle("");
+            IMGChanger("");
+            setToHome(true);
+          }
+        });
+    } else {
+    }
+  }
+
+  axios.interceptors.request.use((config) => {
+    console.log("Request sent to: ", config.url);
+    return config;
+  });
 
   if (toHome === true) {
     return <Navigate to="/home" />;
@@ -160,26 +245,7 @@ function WritingPanel({ articles, setArticles }) {
           </Modal>
         </>
       </div>
-      <AwesomeButton
-        className="mb-5"
-        type="primary"
-        onPress={() => {
-          let newArticle = {
-            title: articleTitle,
-            body: articleBody,
-            img: articleIMG,
-            postedTime: dayjs().format("MMM DD, YYYY"),
-            key: uuid(),
-            reactions: 0,
-            category: articleCategory,
-          };
-          setArticles([newArticle, ...articles]);
-          setArticleBody("");
-          setArticleTitle("");
-          IMGChanger("");
-          // setToHome(true);
-        }}
-      >
+      <AwesomeButton className="mb-5" type="primary" onPress={addArticle}>
         Post
       </AwesomeButton>
     </div>

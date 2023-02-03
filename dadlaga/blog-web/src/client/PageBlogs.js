@@ -3,7 +3,7 @@ import Footer from "../components/footer";
 import HeaderIMG from "../components/header-img";
 import MainNav from "../components/mainNav";
 
-function ClientApp() {
+function PageBlogs() {
   return (
     <div>
       <MainNav />
@@ -13,4 +13,4 @@ function ClientApp() {
     </div>
   );
 }
-export default ClientApp;
+export default PageBlogs;

@@ -37,3 +37,21 @@ code {
   background-color: aliceblue;
   color: red;
 }
+#toBlogsBtn {
+  border: none;
+  background-color: aqua;
+  width: 353px;
+  height: 50px;
+  color: black;
+  display: block;
+  padding: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+#toBlogsBtn:hover {
+  transition-duration: 0.3s;
+  font-size: 17px;
+  color: red;
+}

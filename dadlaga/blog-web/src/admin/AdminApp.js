@@ -1,11 +1,11 @@
 import AdminNav from "../components/adminNav";
 import WritingPanel from "../components/writingPanel";
 
-function AdminApp(props) {
+function AdminApp() {
   return (
     <div>
       <AdminNav />
-      <WritingPanel {...props} />
+      <WritingPanel />
     </div>
   );
 }
