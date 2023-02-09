@@ -2,9 +2,9 @@ function HeaderIMG() {
   return (
     <div
       style={{
-        backgroundImage: `url("https://img.freepik.com/free-vector/dark-blue-memphis-blog-banner-template_53876-98946.jpg?w=2000&t=st=1673424269~exp=1673424869~hmac=3042c3aaf3af379217cbb140ff576d61d17d9fbcd1963ed11f5fb3f4c13abfeb")`,
+        backgroundImage: `url("https://images.pexels.com/photos/15193223/pexels-photo-15193223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")`,
         height: "500px",
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

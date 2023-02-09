@@ -9,6 +9,8 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 function WritingPanel() {
   const [articleIMG, setIMG] = useState(
@@ -191,12 +193,30 @@ function WritingPanel() {
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="">
-        <Form.Label>Artilce-Body</Form.Label>
-        <Form.Control
+        {/* <Form.Control
           value={articleBody}
           onChange={(e) => setArticleBody(e.target.value)}
           as="textarea"
           rows={10}
+        /> */}
+        <Form.Label>Artilce-Body</Form.Label>
+
+        <CKEditor
+          onReady={(editor) => {
+            editor.editing.view.change((writer) => {
+              writer.setStyle(
+                "height",
+                "390px",
+                editor.editing.view.document.getRoot()
+              );
+            });
+          }}
+          editor={ClassicEditor}
+          data={articleBody}
+          onChange={(e, editor) => {
+            const data = editor.getData();
+            setArticleBody(data);
+          }}
         />
       </Form.Group>
       <div className="mb-5">

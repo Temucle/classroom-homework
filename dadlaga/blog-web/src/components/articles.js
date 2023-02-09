@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { Link, useNavigate, Navigate } from "react-router-dom";
+import parse from "html-react-parser";
 
 function Articles() {
   const dayjs = require("dayjs");
@@ -25,19 +26,27 @@ function Articles() {
     loadArticles();
   }, []);
 
-  // function HandleLike(index) {
-  //   const newArticles = [...articles];
-  //   newArticles[index].isLiked = true;
-  //   newArticles[index].reactions = newArticles[index].reactions + 1;
-  //   setArticles(newArticles);
-  // }
+  function HandleLike(selectedArticleId) {
+    axios
+      .put(`http://localhost:1234/articles/like/${selectedArticleId}`)
+      .then((res) => {
+        const { status } = res;
+        if (status === 201) {
+          loadArticles();
+        }
+      });
+  }
 
-  // function HandleDisLike(index) {
-  //   const newArticles = [...articles];
-  //   newArticles[index].isLiked = false;
-  //   newArticles[index].reactions = newArticles[index].reactions - 1;
-  //   setArticles(newArticles);
-  // }
+  function HandleDisLike(selectedArticleId) {
+    axios
+      .put(`http://localhost:1234/articles/dislike/${selectedArticleId}`)
+      .then((res) => {
+        const { status } = res;
+        if (status === 201) {
+          loadArticles();
+        }
+      });
+  }
 
   if (isArticlesRead) {
     var articleCard = articles.map((article, index) => {
@@ -49,6 +58,7 @@ function Articles() {
             height: "345px",
             border: "1px solid gray",
             marginBottom: "20px",
+            boxSizing: "border-box",
           }}
           key={article.key}
         >
@@ -135,7 +145,7 @@ function Articles() {
                       <button
                         className="articleLikeBtn btn  p-0"
                         style={{ border: "none", marginBottom: "16px" }}
-                        // onClick={() => HandleLike(index)}
+                        onClick={() => HandleLike(article.key)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +163,7 @@ function Articles() {
                       <button
                         className="articleLikeBtn btn  p-0"
                         style={{ border: "none", marginBottom: "16px" }}
-                        // onClick={() => HandleDisLike(index)}
+                        onClick={() => HandleDisLike(article.key)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

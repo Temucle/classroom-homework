@@ -58,7 +58,7 @@ function Footer() {
                 src="https://static.wixstatic.com/media/9c486556465843c5850fabfd68dfae49.png/v1/fill/w_50,h_50,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/9c486556465843c5850fabfd68dfae49.png"
               />
             </a>
-            <a href="https://www.instragram.com" target="_blank">
+            <a href="https://www.instagram.com/_ttemujin/" target="_blank">
               <img
                 style={{
                   width: "25px",

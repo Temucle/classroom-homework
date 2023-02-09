@@ -27,12 +27,43 @@ app.get("/articles", (req, res) => {
   res.json(articles);
   res.sendStatus(200);
 });
+
 app.post("/articles", (req, res) => {
   const articles = getArticles();
 
   const { newArticle } = req.body;
 
   articles.unshift(newArticle);
+  fs.writeFileSync("articles.json", JSON.stringify(articles));
+
+  res.sendStatus(201);
+});
+
+app.put("/articles/like/:selectedArticleId", (req, res) => {
+  const articles = getArticles();
+
+  const { selectedArticleId } = req.params;
+  const likedArticle = articles.find(
+    (article) => article.key == selectedArticleId
+  );
+  likedArticle.reactions = likedArticle.reactions + 1;
+  likedArticle.isLiked = true;
+
+  fs.writeFileSync("articles.json", JSON.stringify(articles));
+
+  res.sendStatus(201);
+});
+
+app.put("/articles/dislike/:selectedArticleId", (req, res) => {
+  const articles = getArticles();
+
+  const { selectedArticleId } = req.params;
+  const likedArticle = articles.find(
+    (article) => article.key == selectedArticleId
+  );
+  likedArticle.reactions = likedArticle.reactions - 1;
+  likedArticle.isLiked = false;
+
   fs.writeFileSync("articles.json", JSON.stringify(articles));
 
   res.sendStatus(201);
