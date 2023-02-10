@@ -16,6 +16,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminApp from "./admin/AdminApp";
 import { useState } from "react";
 import PageBlogs from "./client/Blogs";
+import Home from "./client/home";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -23,7 +24,7 @@ function App() {
   return (
     <BrowserRouter Name="App">
       <Routes>
-        <Route path="*" element={<ClientApp />} />
+        <Route path="*" element={<Home />} />
         <Route path="/blogs" element={<PageBlogs />} />
         <Route path="/admin" element={<AdminApp />} />
       </Routes>
