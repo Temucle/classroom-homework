@@ -15,7 +15,7 @@ import ClientApp from "./client/ClientApp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminApp from "./admin/AdminApp";
 import { useState } from "react";
-import PageBlogs from "./client/PageBlogs";
+import PageBlogs from "./client/Blogs";
 
 function App() {
   const [articles, setArticles] = useState([]);

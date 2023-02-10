@@ -1,6 +1,9 @@
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../index.css";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 function Footer() {
   return (
@@ -85,7 +88,17 @@ function Footer() {
           </div>
           <div style={{ width: "200px" }}>
             <p style={{ fontSize: "12px" }}>
-              © 2023 by Design for Life. Powered and secured by Temucle
+              © 2023 by Design for Life. Powered and secured by{" "}
+              <Link
+                to={"/about"}
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  color: "white",
+                }}
+              >
+                Temucle
+              </Link>
             </p>
           </div>
         </div>

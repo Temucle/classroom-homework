@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
 
 function MainNav() {
   return (
@@ -23,32 +24,34 @@ function MainNav() {
           </h4>
         </div>
         <div>
-          <a
+          <Link
             className="ms-5 text-decoration-none text-white"
             style={{ cursor: "pointer" }}
-            href="http://localhost:3000/home"
+            to={"/home"}
           >
             HOME
-          </a>
-          <a
+          </Link>
+          <Link
             className="ms-5 text-decoration-none text-white"
             style={{ cursor: "pointer" }}
-            href="http://localhost:3000/blogs"
+            to={"/blogs"}
           >
             BLOG
-          </a>
-          <a
+          </Link>
+          <Link
             className="ms-5 text-decoration-none text-white"
             style={{ cursor: "pointer" }}
+            to={"/contact"}
           >
             CONTACT
-          </a>
-          <a
+          </Link>
+          <Link
             className="ms-5 text-decoration-none text-white"
             style={{ cursor: "pointer" }}
+            to={"/about"}
           >
             ABOUT
-          </a>
+          </Link>
         </div>
       </Container>
     </Navbar>

@@ -26,6 +26,7 @@ function WritingPanel() {
   const [categoryInputValue, getNewCategory] = useState("");
 
   const [articleTitle, setArticleTitle] = useState("");
+  const [articleDescription, setArticleDescription] = useState("");
   const [articleBody, setArticleBody] = useState("");
   const [articleCategory, setArticleCategory] = useState();
   const [articleCategories, setArticleCategories] = useState();
@@ -105,6 +106,7 @@ function WritingPanel() {
         .post(`http://localhost:1234/articles`, {
           newArticle: {
             title: articleTitle,
+            description: articleDescription,
             body: articleBody,
             img: articleIMG,
             postedTime: dayjs().format("MMM DD, YYYY"),
@@ -192,13 +194,15 @@ function WritingPanel() {
           onChange={(e) => setArticleTitle(e.target.value)}
         />
       </Form.Group>
+      <Form.Label>Artilce-Description</Form.Label>
       <Form.Group className="mb-3" controlId="">
-        {/* <Form.Control
-          value={articleBody}
-          onChange={(e) => setArticleBody(e.target.value)}
+        <Form.Control
+          value={articleDescription}
+          onChange={(e) => setArticleDescription(e.target.value)}
           as="textarea"
-          rows={10}
-        /> */}
+          rows={1}
+          className="mb-3"
+        />
         <Form.Label>Artilce-Body</Form.Label>
 
         <CKEditor

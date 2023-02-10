@@ -48,6 +48,13 @@ function Articles() {
       });
   }
 
+  // function viewSingleArticle(articleId) {
+  //   axios.get(`http://localhost:1234/articles/{articleId}`).then((res) => {
+  //     const { status } = res;
+
+  //   })
+  // }
+
   if (isArticlesRead) {
     var articleCard = articles.map((article, index) => {
       return (
@@ -63,7 +70,7 @@ function Articles() {
           key={article.key}
         >
           <div className="articleIMGdiv d-flex">
-            <a style={{ cursor: "pointer" }}>
+            <Link to={`/articles/${article.key}`} style={{ cursor: "pointer" }}>
               <img
                 className="articleIMG"
                 src={article.img}
@@ -74,7 +81,7 @@ function Articles() {
                   objectFit: "cover",
                 }}
               ></img>
-            </a>
+            </Link>
             <div className="articleRight">
               <div className="articleText mx-5 my-4 ">
                 <div
@@ -101,7 +108,7 @@ function Articles() {
                     </div>
                   </div>
                 </div>
-                <a
+                <Link
                   className="articleINFO mb-1"
                   style={{
                     display: "block",
@@ -114,13 +121,12 @@ function Articles() {
                     cursor: "pointer",
                   }}
                 >
-                  <h2 style={{ fontWeight: "300" }}>
-                    {article.title.split("").slice(0, 45).join("")}
-                  </h2>
+                  <h2 style={{ fontWeight: "300" }}>{article.title}</h2>
                   <p style={{ fontWeight: "200" }}>
-                    {article.body.split("").slice(0, 190).join("") + " . . ."}
+                    {article.description.split("").slice(0, 190).join("") +
+                      " . . ."}
                   </p>
-                </a>
+                </Link>
                 <div
                   className="articleFooter pt-2 d-flex"
                   style={{

@@ -22,10 +22,25 @@ function getCategories() {
   return categories;
 }
 
+// /articles
+
 app.get("/articles", (req, res) => {
   const articles = getArticles();
   res.json(articles);
   res.sendStatus(200);
+});
+
+app.get("/articles/:articleId", (req, res) => {
+  const articles = getArticles();
+  const { articleId } = req.params;
+  const article = articles.find((article) => article.key == id);
+
+  if (article) {
+    res.json(article);
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 app.post("/articles", (req, res) => {
@@ -68,6 +83,8 @@ app.put("/articles/dislike/:selectedArticleId", (req, res) => {
 
   res.sendStatus(201);
 });
+
+// /categories
 
 app.get("/categories", (req, res) => {
   const categories = getCategories();
