@@ -68,7 +68,6 @@ function WritingPanel() {
   }
 
   const dayjs = require("dayjs");
-  dayjs().format();
 
   function urlTranslator(event) {
     urlChanger(event.target.value);
@@ -109,7 +108,7 @@ function WritingPanel() {
             description: articleDescription,
             body: articleBody,
             img: articleIMG,
-            postedTime: dayjs().format("MMM DD, YYYY"),
+            postedTime: dayjs(),
             key: uuid(),
             reactions: 0,
             category: articleCategory,

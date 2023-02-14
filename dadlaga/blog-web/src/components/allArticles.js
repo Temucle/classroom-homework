@@ -214,8 +214,7 @@ function Articles() {
       }}
     >
       <Container className="py-5" style={{ width: "980px" }}>
-        {articleCard && articleCard.slice(0, 4)}
-        <button id="toBlogsBtn">View all posts</button>
+        {articleCard}
       </Container>
     </div>
   );
@@ -225,12 +224,9 @@ function RelativeTime({ date }) {
   const [time, setTime] = useState(dayjs().to(date));
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // setTime(dayjs().to(date))
-      console.log(2);
-    }, 1000);
-
-    return () => clearInterval(interval);
+    setInterval(() => {
+      setTime(dayjs().to(date));
+    }, 50000);
   }, []);
 
   return time;

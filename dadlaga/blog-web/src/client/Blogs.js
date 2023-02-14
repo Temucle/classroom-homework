@@ -1,3 +1,4 @@
+import AllArticles from "../components/allArticles";
 import Articles from "../components/articles";
 import Footer from "../components/footer";
 import HeaderIMG from "../components/header-img";
@@ -8,7 +9,7 @@ function PageBlogs() {
     <div>
       <MainNav />
       <HeaderIMG />
-      <Articles />
+      <AllArticles />
       <Footer />
     </div>
   );
