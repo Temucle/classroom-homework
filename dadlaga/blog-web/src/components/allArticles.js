@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
+import react from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import parse from "html-react-parser";
 import dayjs from "dayjs";
@@ -11,6 +12,7 @@ function Articles() {
   const [articles, setArticles] = useState("");
   const [isArticlesRead, setIsArticlesRead] = useState(false);
   const [articleTimer, setArticleTimer] = useState();
+  const [toBlogs, setToBlogs] = react.useState(false);
 
   var relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
@@ -53,14 +55,17 @@ function Articles() {
       });
   }
 
-  // function viewSingleArticle(articleId) {
-  //   axios.get(`http://localhost:1234/articles/{articleId}`).then((res) => {
-  //     const { status } = res;
-
-  //   })
-  // }
-
+  if (toBlogs === true) {
+    return <Navigate to="/blogs" />;
+  }
   if (isArticlesRead) {
+    // function viewSingleArticle(articleId) {
+    //   axios.get(`http://localhost:1234/articles/{articleId}`).then((res) => {
+    //     const { status } = res;
+
+    //   })
+    // }
+
     var articleCard = articles.map((article, index) => {
       return (
         <article
@@ -75,7 +80,7 @@ function Articles() {
           key={article.key}
         >
           <div className="articleIMGdiv d-flex">
-            <Link to={`/articles/${article.key}`} style={{ cursor: "pointer" }}>
+            <Link to={`/blogs/${article.key}`} style={{ cursor: "pointer" }}>
               <img
                 className="articleIMG"
                 src={article.img}
@@ -117,6 +122,7 @@ function Articles() {
                   </div>
                 </div>
                 <Link
+                  to={`/blogs/${article.key}`}
                   className="articleINFO mb-1"
                   style={{
                     display: "block",
@@ -224,9 +230,11 @@ function RelativeTime({ date }) {
   const [time, setTime] = useState(dayjs().to(date));
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setTime(dayjs().to(date));
-    }, 50000);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return time;

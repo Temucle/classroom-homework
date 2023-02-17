@@ -4,6 +4,7 @@ const fs = require("fs");
 const { parse } = require("path");
 const { json } = require("express");
 const { v4: uuid } = require("uuid");
+const bcrypt = require("bcryptjs");
 
 const port = 1234;
 const app = express();
@@ -11,13 +12,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// const hash = bcrypt.hashSync("Temucle");
+// console.log({ hash });
+
+const user = {
+  username: "Temujin",
+  password: "$2a$10$bQoSI.7Nu0k9qDYYuonP/.nGFpcKLOwoU5/K7OLVIjf6bnLhDZtDi",
+};
+
+let userTokens = [];
+
 function getArticles() {
-  const content = fs.readFileSync("articles.json");
+  const content = fs.readFileSync("jsonData/articles.json");
   const articles = JSON.parse(content);
   return articles;
 }
 function getCategories() {
-  const content = fs.readFileSync("categories.json");
+  const content = fs.readFileSync("jsonData/categories.json");
   const categories = JSON.parse(content);
   return categories;
 }
@@ -49,7 +60,7 @@ app.post("/articles", (req, res) => {
   const { newArticle } = req.body;
 
   articles.unshift(newArticle);
-  fs.writeFileSync("articles.json", JSON.stringify(articles));
+  fs.writeFileSync("jsonData/articles.json", JSON.stringify(articles));
 
   res.sendStatus(201);
 });
@@ -64,7 +75,7 @@ app.put("/articles/like/:selectedArticleId", (req, res) => {
   likedArticle.reactions = likedArticle.reactions + 1;
   likedArticle.isLiked = true;
 
-  fs.writeFileSync("articles.json", JSON.stringify(articles));
+  fs.writeFileSync("jsonData/articles.json", JSON.stringify(articles));
 
   res.sendStatus(201);
 });
@@ -79,7 +90,7 @@ app.put("/articles/dislike/:selectedArticleId", (req, res) => {
   likedArticle.reactions = likedArticle.reactions - 1;
   likedArticle.isLiked = false;
 
-  fs.writeFileSync("articles.json", JSON.stringify(articles));
+  fs.writeFileSync("jsonData/articles.json", JSON.stringify(articles));
 
   res.sendStatus(201);
 });
@@ -99,9 +110,27 @@ app.post("/categories", (req, res) => {
   const newCategory = { id: uuid(), name: name };
 
   categories.push(newCategory);
-  fs.writeFileSync("categories.json", JSON.stringify(categories));
+  fs.writeFileSync("jsonData/categories.json", JSON.stringify(categories));
 
   res.sendStatus(201);
+});
+
+// /admin Sign In
+
+app.get("/login", (req, res) => {
+  const { username, password } = req.query;
+
+  if (
+    user.username === username &&
+    bcrypt.compareSync(password, user.password)
+  ) {
+    const token = uuid();
+    userTokens.push(token);
+    res.json({ token });
+    req.sendStatus(200);
+  } else {
+    res.sendStatus(401);
+  }
 });
 
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-import Articles from "../components/articles";
+import Articles from "../components/articleList";
 import Footer from "../components/footer";
 import HeaderIMG from "../components/header-img";
 import MainNav from "../components/mainNav";

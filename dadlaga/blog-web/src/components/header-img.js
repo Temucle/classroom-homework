@@ -18,7 +18,7 @@ function HeaderIMG() {
         }}
         className="bg-dark px-5 py-3"
       >
-        Temujin's Blog
+        Temujin's Article
       </p>
     </div>
   );

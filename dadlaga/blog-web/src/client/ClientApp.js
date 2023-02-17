@@ -1,4 +1,4 @@
-// import Articles from "../components/articles";
+// import Articles from "../components/Articles";
 // import Footer from "../components/footer";
 // import HeaderIMG from "../components/header-img";
 // import MainNav from "../components/mainNav";
@@ -7,7 +7,7 @@
 //   // return (
 //     // <div>
 //     //   <Routes>
-//     //     <Route path="/article/:id" element={<SingleArticle />} />
+//     //     <Route path="/Article/:id" element={<SingleArticle />} />
 //     //   </Routes>
 //     // </div>
 //   // );
